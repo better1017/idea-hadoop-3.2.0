@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://192.168.11.135:9000</value>
+<!--        <value>hdfs://s135</value>-->
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/home/yylin/hadoop</value>
+    </property>
+</configuration>
