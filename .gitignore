@@ -1,2 +1,4 @@
 # Project exclude paths
 /hdfs/target/
+/hdfs/lib/
+/.idea/
