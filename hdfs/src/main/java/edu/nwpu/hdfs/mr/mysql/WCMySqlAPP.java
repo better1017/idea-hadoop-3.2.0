@@ -1,13 +1,12 @@
 package edu.nwpu.hdfs.mr.mysql;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.db.DBConfiguration;
 import org.apache.hadoop.mapreduce.lib.db.DBInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.db.DBOutputFormat;
 
 /**
  * WCMySqlAPP
@@ -15,7 +14,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class WCMySqlAPP {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", "file:///");
+//        conf.set("fs.defaultFS", "file:///");
         Job job = Job.getInstance(conf);
 
         // 设置job的各种属性
@@ -24,7 +23,7 @@ public class WCMySqlAPP {
 
         // 设置数据库信息
         String driverClass = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/big4?serverTimezone=UTC";
+        String url = "jdbc:mysql://192.168.11.1:3306/big4?serverTimezone=UTC"; //使用虚拟网卡连接到win7的mysql
         String userName = "root";
         String pwd = "123654";
         // 设置数据库配置
@@ -35,8 +34,8 @@ public class WCMySqlAPP {
         // 设置数据库输入
         DBInputFormat.setInput(job, MyDBWritable.class, inputQuery, inputCountQuery);
 
-        // 设置输出路径
-        FileOutputFormat.setOutputPath(job, new Path("D:\\mr\\mr\\mysql\\out"));
+        // 设置数据库输出
+        DBOutputFormat.setOutput(job, "result", "word", "wordCount");
 
         job.setMapperClass(WCMySqlMapper.class); // mapper类
         job.setReducerClass(WCMySqlReducer.class); // reducer类

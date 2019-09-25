@@ -14,9 +14,29 @@ import java.sql.SQLException;
  * MyDBWritable
  */
 public class MyDBWritable implements DBWritable, Writable {
-    private int id;
-    private String name;
-    private String txt;
+    private int id = 0;
+    private String name = "";
+    private String txt = "";
+
+    private String word = "";
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public int getWordCount() {
+        return wordCount;
+    }
+
+    public void setWordCount(int wordCount) {
+        this.wordCount = wordCount;
+    }
+
+    private int wordCount = 0;
 
     public int getId() {
         return id;
@@ -46,21 +66,25 @@ public class MyDBWritable implements DBWritable, Writable {
         out.writeInt(id);
         out.writeUTF(name);
         out.writeUTF(txt);
+        out.writeUTF(word);
+        out.writeInt(wordCount);
     }
 
     public void readFields(DataInput in) throws IOException {
         id = in.readInt();
         name = in.readUTF();
         txt = in.readUTF();
+        word = in.readUTF();
+        wordCount = in.readInt();
     }
 
     /**
      * 写入db
      */
     public void write(PreparedStatement ppst) throws SQLException {
-        ppst.setInt(1, id);
-        ppst.setString(2, name);
-        ppst.setString(3, txt);
+
+        ppst.setString(1, word);
+        ppst.setInt(2, wordCount);
     }
 
     /**
