@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/hdfs/pom.xml" />
+        <option value="$PROJECT_DIR$/JdbcDemo/pom.xml" />
       </list>
     </option>
   </component>

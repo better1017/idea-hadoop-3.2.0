@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hdfs" />
+        <module name="JdbcDemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hdfs" target="1.5" />
+      <module name="JdbcDemo" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
